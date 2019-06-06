@@ -14,9 +14,9 @@ import com.mysql.jdbc.PreparedStatement;
 
 public class PrepareStatementHandler extends BaseStatementHandler{
     
-    public PrepareStatementHandler(Configuration configuration, Executor executor, BoundSql boundSql,
+    public PrepareStatementHandler(Executor executor, BoundSql boundSql,
             MappedStatement mappedStatement) {
-        super(configuration, executor, boundSql, mappedStatement);
+        super(executor, boundSql, mappedStatement);
         
     }
 

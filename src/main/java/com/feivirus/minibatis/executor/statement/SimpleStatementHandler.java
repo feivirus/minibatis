@@ -13,9 +13,9 @@ import com.feivirus.minibatis.session.Configuration;
 import com.feivirus.minibatis.session.ResultHandler;
 
 public class SimpleStatementHandler extends BaseStatementHandler {
-    public SimpleStatementHandler(Configuration configuration, Executor executor, BoundSql boundSql,
+    public SimpleStatementHandler(Executor executor, BoundSql boundSql,
             MappedStatement mapppedStatement) {
-        super(configuration, executor, boundSql, mapppedStatement);
+        super(executor, boundSql, mapppedStatement);
     }
 
     @Override

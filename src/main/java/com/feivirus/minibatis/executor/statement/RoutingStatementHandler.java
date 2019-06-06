@@ -1,5 +1,7 @@
 package com.feivirus.minibatis.executor.statement;
 
+import java.sql.Connection;
+import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.List;
 
@@ -16,10 +18,10 @@ public class RoutingStatementHandler implements StatementHandler {
             RowBounds rowBounds, ResultHandler resultHandler, BoundSql boundSql) {
         switch (mappedStatement.getStatementType()) {
         case STATEMENT:
-            statementDelegate = new SimpleStatementHandler(configuration, executor, boundSql);
+            statementDelegate = new SimpleStatementHandler(executor, boundSql, mappedStatement);
             break;
         case PREPARED:
-            
+            statementDelegate = new PrepareStatementHandler(executor, boundSql, mappedStatement);
             break;            
         case CALLABLE:
             
@@ -33,5 +35,11 @@ public class RoutingStatementHandler implements StatementHandler {
     public <E> List<E> query(Statement statement, ResultHandler resultHandler) {
         return null;
     }
+
+    @Override
+    public Statement prepare(Connection connection, Integer timeout) throws SQLException {
+        // TODO Auto-generated method stub
+        return null;
+    } 
     
 }

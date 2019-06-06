@@ -37,8 +37,12 @@ public class DefaultSqlSession implements SqlSession{
 
     public <E> List<E> selectList(String statement, Object parameter, RowBounds rowBounds) {
         MappedStatement mappedStatement = configuration.getMappedStatement(statement);
-        
-        return executor.query(mappedStatement, parameter, null, Executor.NO_RESULT_HANDLER);
+       
+        try {
+            return executor.query(mappedStatement, parameter, null, Executor.NO_RESULT_HANDLER);
+        } catch (Exception e) {
+        }
+        return null;
     }
 
     public <T> T getMapper(Class<T> type) {

@@ -23,10 +23,9 @@ public abstract class BaseStatementHandler implements StatementHandler{
     
     protected ResultSetHandler resultSetHandler;
     
-    protected BaseStatementHandler(Configuration configuration, Executor executor, BoundSql boundSql,
+    protected BaseStatementHandler(Executor executor, BoundSql boundSql,
             MappedStatement mappedStatement) {
         this.executor = executor;
-        this.configuration = configuration;
         this.boundSql = boundSql;
         this.mappedStatement = mappedStatement;
     }  

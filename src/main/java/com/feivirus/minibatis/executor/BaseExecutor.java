@@ -1,6 +1,7 @@
 package com.feivirus.minibatis.executor;
 
 import java.sql.Connection;
+import java.sql.SQLException;
 import java.util.List;
 import com.feivirus.minibatis.mapping.BoundSql;
 import com.feivirus.minibatis.mapping.MappedStatement;
@@ -13,20 +14,20 @@ public abstract class BaseExecutor implements Executor {
 
     @Override
     public <E> List<E> query(MappedStatement statement, Object parameter, RowBounds rowBounds,
-            ResultHandler resultHandler) {
+            ResultHandler resultHandler) throws SQLException {
         BoundSql boundSql = statement.getBoundSql(parameter);
         return query(statement, parameter, rowBounds, resultHandler, boundSql);
     }
 
     @Override
     public <E> List<E> query(MappedStatement statement, Object parameter, RowBounds rowBounds,
-            ResultHandler resultHandler, BoundSql boundSql) {
+            ResultHandler resultHandler, BoundSql boundSql) throws SQLException {
         List<E> resultList = queryFromDatabase(statement, parameter, rowBounds, resultHandler, boundSql);
         return resultList;
     }
     
     public <E> List<E> queryFromDatabase(MappedStatement statement, Object parameter, RowBounds rowBounds,
-            ResultHandler resultHandler, BoundSql boundSql) {
+            ResultHandler resultHandler, BoundSql boundSql) throws SQLException {
         return doQuery(statement, parameter, rowBounds, resultHandler, boundSql);
     }
     
@@ -35,6 +36,6 @@ public abstract class BaseExecutor implements Executor {
     }
 
     public abstract <E> List<E> doQuery(MappedStatement statement, Object parameter, RowBounds rowBounds,
-            ResultHandler resultHandler, BoundSql boundSql);
+            ResultHandler resultHandler, BoundSql boundSql) throws SQLException;
     
 }
