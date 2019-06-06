@@ -4,13 +4,14 @@ import java.util.HashMap;
 import java.util.Map;
 
 import com.feivirus.minibatis.session.Configuration;
+import com.feivirus.minibatis.session.SqlSession;
 
 /**
  * 
  * @author feivirus
  *
  */
-public class MapperRegistry {
+public class MapperRegistry { 
     private final Configuration configuration;
     
     /**
@@ -19,5 +20,16 @@ public class MapperRegistry {
      */
     private final Map<Class<?>, MapperProxyFactory<?>> knownMappers = new HashMap<Class<?>, MapperProxyFactory<?>>();
     
+    public MapperRegistry(Configuration configuration) {
+        this.configuration = configuration;
+    }
     
+    public <T> T getMapper(Class<T> type, SqlSession sqlSession) {
+        MapperProxyFactory<T> mapperProxyFactory = (MapperProxyFactory<T>)knownMappers.get(type);
+        
+        if (mapperProxyFactory == null) {
+            return null;
+        }
+        return mapperProxyFactory.newInstance(sqlSession);
+    }    
 }

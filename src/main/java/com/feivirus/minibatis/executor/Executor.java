@@ -2,6 +2,7 @@ package com.feivirus.minibatis.executor;
 
 import java.util.List;
 
+import com.feivirus.minibatis.mapping.BoundSql;
 import com.feivirus.minibatis.mapping.MappedStatement;
 import com.feivirus.minibatis.session.ResultHandler;
 import com.feivirus.minibatis.session.RowBounds;
@@ -17,4 +18,7 @@ public interface Executor {
     ResultHandler NO_RESULT_HANDLER = null;
     
    <E> List<E> query(MappedStatement statement, Object parameter, RowBounds rowBounds, ResultHandler resultHandler);
+   
+   <E> List<E> query(MappedStatement statement, Object parameter, RowBounds rowBounds, ResultHandler resultHandler,BoundSql boundSql);
+
 }
